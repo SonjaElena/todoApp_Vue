@@ -13,28 +13,26 @@
         <div class="todo-app">
             <h2>To-do List </h2>
 
-            <div class="filter">
-                <div class="checkbox-label">
-                    <input checked type="radio" id="all" name="filterType">
-                    <label for="allCheckbox">All</label>
-                </div>
-                <div class="checkbox-label">
-                    <input type="radio" id="open" name="filterType">
-                    <label for="openCheckbox">Open</label>
-                </div>
-                <div class="checkbox-label">
-                    <input type="radio" id="done" name="filterType">
-                    <label for="doneCheckbox">Done</label>
-                </div>
-            </div>
 
+            <form class="row">
+                <input type="text" name="description" id="description" v-model="newTodo.description"
+                    placeholder="To do">
+                <select name="done" id="done" v-model="filterOption">
+                    <option value="all">All</option>
+                    <option value="false">FALSE</option>
+                    <option value="true">TRUE</option>
+                </select>
+                <button @click.prevent="addTodo">Add</button>
+                <button @click="rmDone">Remove done</button>
+            </form>
+            <ul>
+                <!-- List todos -->
+                <li v-for="(todo, index) in todos" :key="todo.id" @click="toggleStatus(index)"
+                    :class="{ checked: todo.done }">
+                    {{ todo.description }}
 
-            <div class="row">
-                <input type="text" id="input-box" placeholder="To do">
-                <button id="addTask">Add</button>
-                <button id="removeTask">Remove done</button>
-            </div>
-            <ul id="list-container"></ul>
+                </li>
+            </ul>
 
         </div>
     </div>
